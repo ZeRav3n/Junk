@@ -1,0 +1,45 @@
+<!-- src/main/resources/templates/items.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Items</title>
+</head>
+<body>
+<h1>Items</h1>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Brand</th>
+    <th>Year of Creation</th>
+    <th>Price</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="item : ${items}">
+    <td th:text="${item.id}"></td>
+    <td th:text="${item.name}"></td>
+    <td th:text="${item.brand}"></td>
+    <td th:text="${item.yearOfCreation}"></td>
+    <td th:text="${item.price}"></td>
+  </tr>
+  </tbody>
+</table>
+
+<h2>Filter by Brand and Year 2022</h2>
+<form th:action="@{/items}" method="get">
+  <label for="filterBrand">Brand:</label>
+  <select id="filterBrand" name="filterBrand">
+    <option th:each="brand : ${T(com.example.warehouse.model.FashionBrand).values()}"
+            th:value="${brand}"
+            th:text="${brand}">
+    </option>
+  </select>
+  <button type="submit">Filter</button>
+</form>
+</body>
+</html>

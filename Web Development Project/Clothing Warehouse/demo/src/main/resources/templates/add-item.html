@@ -1,0 +1,41 @@
+<!-- src/main/resources/templates/add-item.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Add Item</title>
+</head>
+<body>
+<h1>Add Item</h1>
+<form action="#" th:action="@{/items/add}" th:object="${item}" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" th:field="*{name}" />
+    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error"></span>
+    <br />
+
+    <label for="brand">Brand:</label>
+    <select id="brand" th:field="*{brand}">
+        <option th:each="brand : ${T(com.example.warehouse.model.FashionBrand).values()}"
+                th:value="${brand}"
+                th:text="${brand}">
+        </option>
+    </select>
+    <span th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}" class="error"></span>
+    <br />
+
+    <label for="yearOfCreation">Year of Creation:</label>
+    <input type="number" id="yearOfCreation" th:field="*{yearOfCreation}" />
+    <span th:if="${#fields.hasErrors('yearOfCreation')}" th:errors="*{yearOfCreation}" class="error"></span>
+    <br />
+
+    <label for="price">Price:</label>
+    <input type="number" step="0.01" id="price" th:field="*{price}" />
+    <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="error"></span>
+    <br />
+    <button type="submit">Add Item</button>
+</form>
+</body>
+</html>
+
